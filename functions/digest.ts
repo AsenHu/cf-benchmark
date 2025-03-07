@@ -3,7 +3,7 @@ const onRequestGet = async (context: { request: Request }) => {
     const size = new URL(context.request.url).searchParams.get('size') || '1024'; // 单位是字节
 
     // 生成数据
-    const data = new Uint8Array(parseInt(size)).fill(0);
+    const data = new ArrayBuffer(parseInt(size));
 
     // MD5
     let start = Date.now();
