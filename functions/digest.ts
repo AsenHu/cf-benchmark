@@ -6,10 +6,12 @@ const onRequestGet = async (context: { request: Request }) => {
 
     const start = performance.now();
     for (let i = 0; i < parseInt(times); i++) {
-        const hash = await crypto.subtle.digest(algorithm, new TextEncoder().encode(data));
+        const hash = await crypto.subtle.digest(algorithm, new TextEncoder().encode(data + i));
         const hashstr = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
         const spent = performance.now() - start;
-        console.log(`[${i + 1}/${times}] ${algorithm}(${data}) = ${hashstr} (${spent}ms)`);
+        if (i % 100 == 0) {
+            console.log(`[${i + 1}/${times}] ${algorithm}(${data}) = ${hashstr} (${spent}ms)`);
+        }
     }
 
     return new Response(null, {
