@@ -2,8 +2,8 @@ const onRequestGet = async (context: { request: Request }) => {
     // 提取测试数据大小
     const size = new URL(context.request.url).searchParams.get('size') || '1024'; // 单位是字节
 
-    // 生成随机数据
-    const data = crypto.getRandomValues(new Uint8Array(parseInt(size)));
+    // 生成数据
+    const data = new Uint8Array(parseInt(size)).fill(0);
 
     // MD5
     let start = Date.now();
