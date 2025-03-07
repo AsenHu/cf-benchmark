@@ -1,6 +1,6 @@
-const onRequestGet = async (context: { req: Request }) => {
+const onRequestGet = async (context: { request: Request }) => {
     // 提取测试数据大小
-    const size = new URL(context.req.url).searchParams.get('size') || '1024'; // 单位是字节
+    const size = new URL(context.request.url).searchParams.get('size') || '1024'; // 单位是字节
 
     // 生成随机数据
     const data = crypto.getRandomValues(new Uint8Array(parseInt(size)));
